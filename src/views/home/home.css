@@ -1,4 +1,16 @@
-.home-nav {
+#home {
+  padding-top: 44px;
+  padding-bottom: 49px;
+}
+#home .home-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
   background: var(--color-high-text);
   color: #fff;
+  z-index: 1;
+}
+#home .tab-control-home {
+  position: sticky;
+  top: 44px;
 }
