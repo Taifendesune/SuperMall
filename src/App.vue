@@ -8,10 +8,19 @@
 <script>
 import MainTabBar from 'components/content/tabbar/MainTabBar';
 
+
 export default {
   name: 'App',
+  data () {
+    return {
+      message: ''
+    }
+  },
   components: {
     MainTabBar
+  },
+  mounted () {
+    
   }
 }
 </script>

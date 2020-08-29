@@ -13,10 +13,10 @@
       </tab-bar-item>
       <tab-bar-item path="/category" :active-color="'var(--color-high-text)'">
         <template #item-img>
-          <img src="~assets/img/common/shouye.svg" alt="分类" />
+          <img src="~assets/img/common/fenlei.svg" alt="分类" />
         </template>
         <template #item-img-act>
-          <img src="~assets/img/common/shouye-active.svg" alt="分类" />
+          <img src="~assets/img/common/fenlei-active.svg" alt="分类" />
         </template>
         <template #item-text>
           <span>分类</span>
