@@ -1,0 +1,21 @@
+.recommends {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-bottom: 8px solid #eee;
+}
+.recommends .recommend-item {
+  flex-shrink: 1;
+  text-align: center;
+  padding: 10px 0 30px 0;
+}
+.recommends .recommend-item a {
+  text-decoration: none;
+  color: var(--color-text);
+}
+.recommends .recommend-item a img {
+  margin-bottom: 10px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
