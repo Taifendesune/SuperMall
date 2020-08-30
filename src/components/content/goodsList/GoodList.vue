@@ -1,5 +1,5 @@
 <template>
-  <div class="good-list">
+  <div id="good-list" class="good-list">
     <good-list-item v-for="good in goods" :good-item="good" :key="good.id" />
   </div>
 </template>

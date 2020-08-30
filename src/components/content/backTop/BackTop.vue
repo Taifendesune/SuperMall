@@ -22,6 +22,7 @@ export default {
     display: grid;
     grid-template: 1fr / 1fr;
     place-items: center;
+    cursor: pointer;
   }
   .back-top img {
     width: 60%;

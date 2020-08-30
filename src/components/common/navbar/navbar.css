@@ -8,6 +8,9 @@
 }
 .nav-bar .left {
   width: 60px;
+  display: grid;
+  grid-template: 1fr;
+  place-items: stretch;
 }
 .nav-bar .center {
   flex: 1;

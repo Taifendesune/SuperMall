@@ -9,8 +9,8 @@
     <recommend-view :recommends="recommends"></recommend-view>
     <feature-view :feature="feature"></feature-view>
     <tab-control @tab-click="currentTab = $event" class="tab-control-home" :titles="titles"></tab-control>
-    <good-list :goods="goods[currentTabName].list"></good-list>
-    <back-top></back-top>
+    <good-list ref="list" :goods="goods[currentTabName].list"></good-list>
+    <back-top v-if="showBackTop" @click.native="backTop"></back-top>
   </div>
 </template>
 
@@ -65,7 +65,9 @@ export default {
         }
       },
       titles: ['精选', '流行', '休闲'],
-      currentTab: 0
+      currentTab: 0,
+      showBackTop: false,
+      scrollPosition: 0
     };
   },
   computed: {
@@ -82,14 +84,46 @@ export default {
     this.getHomeGoods('sell');
     this.getHomeGoods('pop');
     this.getHomeGoods('casual');  
+    this.$bus.$on('aling', (data) => {
+      console.log(data)
+    })
   },
   methods: {
+    debounce (func, delay) {
+      let timer = null;
+      const debFunc = function (... args) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      }
+      return debFunc;
+    },
     getHomeGoods (type) {
       network.getGoods(type, ++this.goods[type].page)
       .then(res => {
         this.goods[type].list.push(... res);
       })
-    }  
+    },
+    backTop () {
+      window.scroll({
+        left: 0,
+        top: 0,
+        behavior: 'smooth'
+      })
+    },
+    listenScroll () {
+      window.onscroll = this.debounce(this.onScroll, 300);
+    },
+    removeScroll () {
+      window.onscroll = null;
+    },
+    onScroll (e) {
+      this.showBackTop = document.documentElement.scrollTop > 1000;
+      if (Math.ceil(document.documentElement.scrollTop + document.documentElement.clientHeight) === document.documentElement.scrollHeight) {
+        console.log('到底了');
+      }
+    }
   },
   components: {
     HomeSwiper,
@@ -99,6 +133,22 @@ export default {
     TabControl,
     GoodList,
     BackTop
+  },
+  beforeRouteLeave (to, from, next) {
+    this.removeScroll();
+    this.scrollPosition = document.documentElement.scrollTop;
+    next();
+  },
+  activated () {
+    this.listenScroll();
+    window.scrollTo({
+      top: this.scrollPosition,
+    })
+  },
+  mounted () {
+    setTimeout(() => {
+      this.$refs.list.$el.scrollIntoView(true);
+    }, 1000)
   }
 };
 </script>

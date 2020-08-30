@@ -1,5 +1,5 @@
 <template>
-  <section class="good-item">
+  <section class="good-item" @click="itemClick">
     <img :src="goodItem.src" alt="商品图片">
     <p>{{goodItem.title}}</p>
   </section>
@@ -14,6 +14,11 @@ export default {
       default () {
         return {}
       }
+    }
+  },
+  methods: {
+    itemClick () {
+      this.$router.push('/detail/' + this.goodItem.id);
     }
   }
 }
